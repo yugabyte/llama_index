@@ -534,7 +534,7 @@ class YBVectorStore(BasePydanticVectorStore):
 
         with self._session() as session, session.begin():
             statement = sqlalchemy.text(
-                f"CREATE INDEX NONCONCURRENTLY IF NOT EXISTS {index_name} "
+                f"CREATE INDEX IF NOT EXISTS {index_name} "
                 f"ON {self.schema_name}.{self._table_class.__tablename__} "
                 f"USING ybhnsw (embedding {hnsw_dist_method}) "
                 f"WITH (m = {hnsw_m}, ef_construction = {hnsw_ef_construction})"
